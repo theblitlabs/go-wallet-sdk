@@ -40,7 +40,16 @@ func NewStakeWallet(client *Client, contractAddr, tokenAddr common.Address) (*St
 
 // GetStakeInfo retrieves stake information for a device ID
 func (s *StakeWallet) GetStakeInfo(deviceID string) (StakeInfo, error) {
-	return s.contract.GetStakeInfo(&bind.CallOpts{}, deviceID)
+	info, err := s.contract.GetWalletInfo(&bind.CallOpts{}, deviceID)
+	if err != nil {
+		return StakeInfo{}, err
+	}
+	return StakeInfo{
+		Amount:        info.Balance,
+		DeviceID:      info.DeviceID,
+		WalletAddress: info.WalletAddress,
+		Exists:        info.Exists,
+	}, nil
 }
 
 // Stake tokens with device ID
@@ -68,8 +77,8 @@ func (s *StakeWallet) Stake(amount *big.Int, deviceID string) (*types.Transactio
 		return nil, err
 	}
 
-	// Now stake the tokens
-	return s.contract.Stake(opts, amount, deviceID, s.client.Address())
+	// Now add the funds
+	return s.contract.AddFunds(opts, amount, deviceID, s.client.Address())
 }
 
 // TransferPayment transfers stake between devices
@@ -84,7 +93,7 @@ func (s *StakeWallet) TransferPayment(creatorDeviceID, solverDeviceID string, am
 
 // GetBalance returns the stake balance for a device ID
 func (s *StakeWallet) GetBalance(deviceID string) (*big.Int, error) {
-	return s.contract.GetBalanceByDeviceID(&bind.CallOpts{}, deviceID)
+	return s.contract.GetBalance(&bind.CallOpts{}, deviceID)
 }
 
 // WithdrawStake withdraws staked tokens

@@ -1,4 +1,4 @@
-// Package paritysdk provides a unified SDK for Parity token and staking operations
+// Package walletsdk provides a unified SDK for Parity token and staking operations
 package walletsdk
 
 import (
@@ -209,8 +209,8 @@ func (c *Client) GetStakeInfo(deviceID string) (StakeInfo, error) {
 	return c.stakeWallet.GetStakeInfo(deviceID)
 }
 
-// Stake tokens with device ID
-func (c *Client) Stake(amount *big.Int, deviceID string) (*types.Transaction, error) {
+// AddFunds adds funds to a device's wallet
+func (c *Client) AddFunds(amount *big.Int, deviceID string) (*types.Transaction, error) {
 	if c.stakeWallet == nil {
 		return nil, fmt.Errorf("stake wallet not initialized")
 	}
@@ -233,8 +233,8 @@ func (c *Client) GetStakeBalance(deviceID string) (*big.Int, error) {
 	return c.stakeWallet.GetBalance(deviceID)
 }
 
-// WithdrawStake withdraws staked tokens
-func (c *Client) WithdrawStake(deviceID string, amount *big.Int) (*types.Transaction, error) {
+// WithdrawFunds withdraws staked tokens
+func (c *Client) WithdrawFunds(deviceID string, amount *big.Int) (*types.Transaction, error) {
 	if c.stakeWallet == nil {
 		return nil, fmt.Errorf("stake wallet not initialized")
 	}
