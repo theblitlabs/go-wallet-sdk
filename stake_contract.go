@@ -1,4 +1,4 @@
-package paritysdk
+package walletsdk
 
 import (
 	"math/big"

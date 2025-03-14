@@ -1,4 +1,4 @@
-module github.com/theblitlabs/go-parity-sdk
+module github.com/theblitlabs/go-wallet-sdk
 
 go 1.21
 

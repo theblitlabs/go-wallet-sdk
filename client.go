@@ -1,5 +1,5 @@
 // Package paritysdk provides a unified SDK for Parity token and staking operations
-package paritysdk
+package walletsdk
 
 import (
 	"crypto/ecdsa"

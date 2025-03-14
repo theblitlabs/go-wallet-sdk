@@ -1,7 +1,5 @@
 # Parity SDK for Go
 
-A comprehensive Go SDK for interacting with Parity token and staking contracts. This SDK combines functionality from both `go-parity-wallet` and `go-stake-client` into a single, easy-to-use package.
-
 ## Features
 
 - Complete token management functionality
@@ -23,7 +21,7 @@ A comprehensive Go SDK for interacting with Parity token and staking contracts. 
 ## Installation
 
 ```bash
-go get github.com/theblitlabs/go-parity-sdk
+go get github.com/theblitlabs/go-wallet-sdk
 ```
 
 ## Quick Start
@@ -36,12 +34,12 @@ import (
     "math/big"
 
     "github.com/ethereum/go-ethereum/common"
-    "github.com/theblitlabs/go-parity-sdk"
+    "github.com/theblitlabs/go-wallet-sdk"
 )
 
 func main() {
     // Create a new client
-    config := paritysdk.ClientConfig{
+    config := walletsdk.ClientConfig{
         RPCURL:       "https://your-ethereum-node.com",
         ChainID:      1, // Mainnet
         TokenAddress: common.HexToAddress("0xtoken_address"),
@@ -49,7 +47,7 @@ func main() {
         PrivateKey:   "your_private_key",
     }
 
-    client, err := paritysdk.NewClient(config)
+    client, err := walletsdk.NewClient(config)
     if err != nil {
         log.Fatal(err)
     }
